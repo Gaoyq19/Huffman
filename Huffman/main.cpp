@@ -11,13 +11,14 @@
 #include <string>
 #include <map>
 #include "myPriorityQueue.hpp"
+#include "TreeNode.hpp"
 using namespace std;
 void readfile(std::string path){
     ifstream myfile(path);
     
     string line;
     map<char, int> occ;
-    myPriorityQueue<pair<char, int>> priorityQueue;
+    myPriorityQueue<TreeNode*> priorityQueue;
     int total = 0;
     if (myfile.is_open())
     {
@@ -30,12 +31,12 @@ void readfile(std::string path){
             cout << line << endl;
         }
         for (auto i  : occ) {
-            priorityQueue.push(i);
+            priorityQueue.push(new TreeNode(i));
         }
         while (!priorityQueue.empty()) {
-            pair<char, int> top = priorityQueue.top();
+            TreeNode *top = priorityQueue.top();
             priorityQueue.pop();
-            cout << top.first << ',' << top.second << endl;
+            cout << top->getVal().first << ',' << top->getVal().second << endl;
         }
     }else{
         cout << "can not open this file" << endl;

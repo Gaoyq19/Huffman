@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <vector>
+#include "TreeNode.hpp"
 template<class T>
 class myPriorityQueue
 {
@@ -114,33 +115,33 @@ T myPriorityQueue<T>::top()
 }
 
 template<>
-class myPriorityQueue<std::pair<char, int>>
+class myPriorityQueue<TreeNode*>
 {
 private:
     int capacity = 100;    //队列容量
     int queueSize = 0;         //队列大小
-    std::vector<std::pair<char, int>> data;   //队列变量
+    std::vector<TreeNode*> data;   //队列变量
 
 public:
     myPriorityQueue();
     ~myPriorityQueue();
     int size();
     bool empty();
-    void push(std::pair<char, int> val);
+    void push(TreeNode *val);
     void pop();
-    std::pair<char, int> top();
+    TreeNode* top();
 };
-myPriorityQueue<std::pair<char, int>>::myPriorityQueue()
+myPriorityQueue<TreeNode*>::myPriorityQueue()
 {
-    data = std::vector<std::pair<char, int>>(capacity);
+    data = std::vector<TreeNode*>(capacity,nullptr);
 }
-myPriorityQueue<std::pair<char, int>>::~myPriorityQueue()
+myPriorityQueue<TreeNode*>::~myPriorityQueue()
 {
     while (!empty()){
         pop();
     }
 }
-bool myPriorityQueue<std::pair<char, int>>::empty()
+bool myPriorityQueue<TreeNode*>::empty()
 {
     if (queueSize > 0){
         return false;
@@ -148,11 +149,11 @@ bool myPriorityQueue<std::pair<char, int>>::empty()
     return true;
 }
 
-int myPriorityQueue<std::pair<char, int>>::size()
+int myPriorityQueue<TreeNode*>::size()
 {
     return queueSize;
 }
-void myPriorityQueue<std::pair<char, int>>::push(std::pair<char, int> val)
+void myPriorityQueue<TreeNode*>::push(TreeNode *val)
 {
     if (empty())
     {
@@ -164,14 +165,14 @@ void myPriorityQueue<std::pair<char, int>>::push(std::pair<char, int> val)
     data[size() - 1] = val;
     int i = size() - 1;
     int parent = (i - 1) / 2;
-    while (parent >= 0 && data[i].second < data[parent].second) {
+    while (parent >= 0 && data[i]->getVal().second < data[parent]->getVal().second) {
         std::swap(data[i], data[parent]);
         i = parent;
         parent = (i - 1) / 2;
     }
 
 }
-void myPriorityQueue<std::pair<char, int>>::pop()
+void myPriorityQueue<TreeNode*>::pop()
 {
     if (empty())
     {
@@ -182,8 +183,8 @@ void myPriorityQueue<std::pair<char, int>>::pop()
     int i = 0;
     int leftChild = 2 * i + 1;
     int rightChild = 2 * i + 2;
-    while ((leftChild < size() && data[i].second > data[leftChild].second ) || (rightChild < size() && data[i].second > data[rightChild].second)) {
-        if (data[leftChild].second < data[rightChild].second) {
+    while ((leftChild < size() && data[i]->getVal().second > data[leftChild]->getVal().second ) || (rightChild < size() && data[i]->getVal().second > data[rightChild]->getVal().second)) {
+        if (data[leftChild]->getVal().second < data[rightChild]->getVal().second) {
             std::swap(data[i], data[leftChild]);
             i = leftChild;
         }else{
@@ -195,7 +196,7 @@ void myPriorityQueue<std::pair<char, int>>::pop()
     }
 }
 
-std::pair<char, int> myPriorityQueue<std::pair<char, int>>::top()
+TreeNode* myPriorityQueue<TreeNode*>::top()
 {
     if (empty())
     {
