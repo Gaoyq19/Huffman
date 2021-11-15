@@ -13,8 +13,8 @@
 #include <vector>
 class TreeNode{
     std::pair<char, int> val;
-    TreeNode *left;
-    TreeNode *right;
+    TreeNode *left = nullptr;
+    TreeNode *right = nullptr;
 public:
     std::pair<char, int> getVal(){
         return val;

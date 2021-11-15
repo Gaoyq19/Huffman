@@ -25,6 +25,15 @@ public:
     std::string getCode(char c){
         return code[c];
     }
+    void encode(TreeNode *p, std::string str){
+        if(p){
+            if (p->getVal().first != '\0') {
+                code[p->getVal().first] = str;
+            }
+            encode(p->getLeftChild(), str + "0");
+            encode(p->getRightChild(), str + "1");
+        }
+    }
     HuffmanTree(std::string path){
         std::ifstream myfile(path);
         std::string line;
@@ -59,6 +68,7 @@ public:
             priorityQueue.push(parent);
         }
         head = priorityQueue.top();
+        encode(head, "");
     }
 };
 #endif /* HuffmanTree_hpp */
