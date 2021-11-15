@@ -26,7 +26,6 @@
 		D38C5B262742393700773B45 /* Huffman */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Huffman; sourceTree = BUILT_PRODUCTS_DIR; };
 		D38C5B292742393700773B45 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D38C5B31274239CA00773B45 /* myPriorityQueue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = myPriorityQueue.hpp; sourceTree = "<group>"; };
-		D38C5B3A27423AAA00773B45 /* huffmanTree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = huffmanTree.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +60,6 @@
 			children = (
 				D38C5B292742393700773B45 /* main.cpp */,
 				D38C5B31274239CA00773B45 /* myPriorityQueue.hpp */,
-				D38C5B3A27423AAA00773B45 /* huffmanTree.hpp */,
 			);
 			path = Huffman;
 			sourceTree = "<group>";

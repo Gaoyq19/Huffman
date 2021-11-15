@@ -16,7 +16,7 @@ class myPriorityQueue
 {
 private:
     int capacity = 100;    //队列容量
-    int queueSize;         //队列大小
+    int queueSize = 0;         //队列大小
     std::vector<T> data;   //队列变量
 
 public:
@@ -118,7 +118,7 @@ class myPriorityQueue<std::pair<char, int>>
 {
 private:
     int capacity = 100;    //队列容量
-    int queueSize;         //队列大小
+    int queueSize = 0;         //队列大小
     std::vector<std::pair<char, int>> data;   //队列变量
 
 public:
@@ -154,7 +154,6 @@ int myPriorityQueue<std::pair<char, int>>::size()
 }
 void myPriorityQueue<std::pair<char, int>>::push(std::pair<char, int> val)
 {
-    // 空则直接入队  不能省略
     if (empty())
     {
         data[0] = val;
@@ -188,7 +187,7 @@ void myPriorityQueue<std::pair<char, int>>::pop()
             std::swap(data[i], data[leftChild]);
             i = leftChild;
         }else{
-            std::swap(data[i].second, data[rightChild].second);
+            std::swap(data[i], data[rightChild]);
             i = rightChild;
         }
         leftChild = 2 * i + 1;

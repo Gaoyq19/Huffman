@@ -12,8 +12,9 @@
 #include <map>
 #include "myPriorityQueue.hpp"
 using namespace std;
-void readfile(string path){
+void readfile(std::string path){
     ifstream myfile(path);
+    
     string line;
     map<char, int> occ;
     myPriorityQueue<pair<char, int>> priorityQueue;
@@ -28,25 +29,23 @@ void readfile(string path){
             }
             cout << line << endl;
         }
+        for (auto i  : occ) {
+            priorityQueue.push(i);
+        }
+        while (!priorityQueue.empty()) {
+            pair<char, int> top = priorityQueue.top();
+            priorityQueue.pop();
+            cout << top.first << ',' << top.second << endl;
+        }
     }else{
         cout << "can not open this file" << endl;
     }
     myfile.close();
 }
-
 int main()
 {
-    //readfile("/Users/gggyq/早稻田ips/面试/Huffman/Huffman/txt文本/article_0.txt");
+    readfile("/Users/gggyq/早稻田ips/面试/Huffman/Huffman/txt文本/article_0.txt");
     string str;
-    pair<char, int> p0;
-    pair<char, int> p1;
-    p0 = make_pair('a', 10);
-    p1 = make_pair('b', 1);
-    if (p0 > p1) {
-        cout<<0<<endl;
-    }else{
-        cout<<1<<endl;
-    }
     return 0;
 }
  
