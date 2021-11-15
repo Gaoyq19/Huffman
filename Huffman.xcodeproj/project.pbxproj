@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D38C5B2A2742393700773B45 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D38C5B292742393700773B45 /* main.cpp */; };
-		D38C5B32274239CA00773B45 /* myPriorityQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D38C5B30274239CA00773B45 /* myPriorityQueue.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,8 +25,8 @@
 /* Begin PBXFileReference section */
 		D38C5B262742393700773B45 /* Huffman */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Huffman; sourceTree = BUILT_PRODUCTS_DIR; };
 		D38C5B292742393700773B45 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		D38C5B30274239CA00773B45 /* myPriorityQueue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = myPriorityQueue.cpp; sourceTree = "<group>"; };
 		D38C5B31274239CA00773B45 /* myPriorityQueue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = myPriorityQueue.hpp; sourceTree = "<group>"; };
+		D38C5B3A27423AAA00773B45 /* huffmanTree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = huffmanTree.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +60,8 @@
 			isa = PBXGroup;
 			children = (
 				D38C5B292742393700773B45 /* main.cpp */,
-				D38C5B30274239CA00773B45 /* myPriorityQueue.cpp */,
 				D38C5B31274239CA00773B45 /* myPriorityQueue.hpp */,
+				D38C5B3A27423AAA00773B45 /* huffmanTree.hpp */,
 			);
 			path = Huffman;
 			sourceTree = "<group>";
@@ -125,7 +124,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D38C5B2A2742393700773B45 /* main.cpp in Sources */,
-				D38C5B32274239CA00773B45 /* myPriorityQueue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

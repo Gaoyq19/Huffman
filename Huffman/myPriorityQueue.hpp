@@ -75,13 +75,6 @@ void myPriorityQueue<T>::push(T val)
         i = parent;
         parent = (i - 1) / 2;
     }
-    //if (key != data[i / 2])          //如果不能插入重复值 用下面的
-    //  data[i] = key;
-    //else
-    //{
-    //  size--;
-    //  perror("Same value");
-    //}
 
 }
 
@@ -112,6 +105,98 @@ void myPriorityQueue<T>::pop()
 
 template<class T>
 T myPriorityQueue<T>::top()
+{
+    if (empty())
+    {
+        throw "Priority queue is empty\n";
+    }
+    return data[0];
+}
+
+template<>
+class myPriorityQueue<std::pair<char, int>>
+{
+private:
+    int capacity = 100;    //队列容量
+    int queueSize;         //队列大小
+    std::vector<std::pair<char, int>> data;   //队列变量
+
+public:
+    myPriorityQueue();
+    ~myPriorityQueue();
+    int size();
+    bool empty();
+    void push(std::pair<char, int> val);
+    void pop();
+    std::pair<char, int> top();
+};
+myPriorityQueue<std::pair<char, int>>::myPriorityQueue()
+{
+    data = std::vector<std::pair<char, int>>(capacity);
+}
+myPriorityQueue<std::pair<char, int>>::~myPriorityQueue()
+{
+    while (!empty()){
+        pop();
+    }
+}
+bool myPriorityQueue<std::pair<char, int>>::empty()
+{
+    if (queueSize > 0){
+        return false;
+    }
+    return true;
+}
+
+int myPriorityQueue<std::pair<char, int>>::size()
+{
+    return queueSize;
+}
+void myPriorityQueue<std::pair<char, int>>::push(std::pair<char, int> val)
+{
+    // 空则直接入队  不能省略
+    if (empty())
+    {
+        data[0] = val;
+        ++queueSize;
+        return;
+    }
+    ++queueSize;
+    data[size() - 1] = val;
+    int i = size() - 1;
+    int parent = (i - 1) / 2;
+    while (parent >= 0 && data[i].second < data[parent].second) {
+        std::swap(data[i], data[parent]);
+        i = parent;
+        parent = (i - 1) / 2;
+    }
+
+}
+void myPriorityQueue<std::pair<char, int>>::pop()
+{
+    if (empty())
+    {
+        throw "Priority queue is empty\n";
+    }
+    data[0] = data[size() - 1];
+    --queueSize;
+    int i = 0;
+    int leftChild = 2 * i + 1;
+    int rightChild = 2 * i + 2;
+    while ((leftChild < size() && data[i].second > data[leftChild].second ) || (rightChild < size() && data[i].second > data[rightChild].second)) {
+        if (data[leftChild].second < data[rightChild].second) {
+            std::swap(data[i], data[leftChild]);
+            i = leftChild;
+        }else{
+            std::swap(data[i].second, data[rightChild].second);
+            i = rightChild;
+        }
+        leftChild = 2 * i + 1;
+        rightChild = 2 * i + 2;
+    }
+}
+
+std::pair<char, int> myPriorityQueue<std::pair<char, int>>::top()
 {
     if (empty())
     {
