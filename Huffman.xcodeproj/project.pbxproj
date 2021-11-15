@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D320DD712742599E004D1A26 /* TreeNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D320DD6F2742599E004D1A26 /* TreeNode.cpp */; };
+		D320DD7427425E7E004D1A26 /* HuffmanTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D320DD7227425E7E004D1A26 /* HuffmanTree.cpp */; };
 		D38C5B2A2742393700773B45 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D38C5B292742393700773B45 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,8 @@
 /* Begin PBXFileReference section */
 		D320DD6F2742599E004D1A26 /* TreeNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TreeNode.cpp; sourceTree = "<group>"; };
 		D320DD702742599E004D1A26 /* TreeNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TreeNode.hpp; sourceTree = "<group>"; };
+		D320DD7227425E7E004D1A26 /* HuffmanTree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HuffmanTree.cpp; sourceTree = "<group>"; };
+		D320DD7327425E7E004D1A26 /* HuffmanTree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HuffmanTree.hpp; sourceTree = "<group>"; };
 		D38C5B262742393700773B45 /* Huffman */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Huffman; sourceTree = BUILT_PRODUCTS_DIR; };
 		D38C5B292742393700773B45 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D38C5B31274239CA00773B45 /* myPriorityQueue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = myPriorityQueue.hpp; sourceTree = "<group>"; };
@@ -65,6 +68,8 @@
 				D38C5B31274239CA00773B45 /* myPriorityQueue.hpp */,
 				D320DD6F2742599E004D1A26 /* TreeNode.cpp */,
 				D320DD702742599E004D1A26 /* TreeNode.hpp */,
+				D320DD7227425E7E004D1A26 /* HuffmanTree.cpp */,
+				D320DD7327425E7E004D1A26 /* HuffmanTree.hpp */,
 			);
 			path = Huffman;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D38C5B2A2742393700773B45 /* main.cpp in Sources */,
+				D320DD7427425E7E004D1A26 /* HuffmanTree.cpp in Sources */,
 				D320DD712742599E004D1A26 /* TreeNode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
