@@ -7,11 +7,17 @@
 //
 
 #include "HuffmanTree.hpp"
+
 using namespace std;
 int main()
 {
-   // HuffmanTree huffman("/Users/gggyq/早稻田ips/面试/Huffman/Huffman/txt文本/article_0.txt", "/Users/gggyq/早稻田ips/面试/Huffman/Huffman/z.txt");
-    HuffmanTree zio("/Users/gggyq/早稻田ips/面试/Huffman/Huffman/z.txt","/Users/gggyq/早稻田ips/面试/Huffman/Huffman/ze.txt",true);
+    string path_head = "/Users/gggyq/早稻田ips/面试/Huffman/Huffman/";
+    string compressName;
+    string decompressPath;
+    cout << "输入需要压缩的文件名: ";
+    cin >> compressName;
+    HuffmanTree huffman(path_head + compressName +".txt", path_head + compressName + "_compressed.txt");
+    HuffmanTree zio(path_head + compressName + "_compressed.txt", path_head + compressName +"_decompressed.txt",true);
     return 0;
 }
  

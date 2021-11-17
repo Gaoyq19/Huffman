@@ -22,27 +22,24 @@ class HuffmanTree{
     std::map<char, int> occ;
     myPriorityQueue<TreeNode*> priorityQueue;
     TreeNode *head;
-    std::map<char, std::string> code;
-    std::map<std::string, char> deCode;
+    std::map<char, std::string> encodeMap;
+    std::map<std::string, char> decodeMap;
 public:
-    std::string getCode(char c){
-        return code[c];
-    }
     void encode(TreeNode *p, std::string str){
         if(p){
             if (p->getVal().first != '\0') {
-                code[p->getVal().first] = str;
+                encodeMap[p->getVal().first] = str;
             }
             encode(p->getLeftChild(), str + "0");
             encode(p->getRightChild(), str + "1");
         }
     }
     void decode(){
-        for (auto i : code) {
-            deCode[i.second] = i.first;
+        for (auto i : encodeMap) {
+            decodeMap[i.second] = i.first;
         }
     }
-    void func(){
+    void decompress(){
         std::ifstream myfile(path);
         std::ofstream outFile(outPath, std::ios::out);
         std::string line;
@@ -64,8 +61,8 @@ public:
                 std::string input = "";
                 for (int i = 0; i < line.size(); ++i) {
                     c += line[i];
-                    if(deCode.count(c)){
-                        input += deCode[c];
+                    if(decodeMap.count(c)){
+                        input += decodeMap[c];
                         c = "";
                     }
                 }
@@ -77,7 +74,7 @@ public:
         outFile.close();
         myfile.close();
     }
-    void transform(){
+    void compress(){
         std::ifstream myfile(path);
         std::ofstream outFile(outPath, std::ios::out);
         std::string line;
@@ -95,7 +92,7 @@ public:
             {
                 std::string inputLine = "";
                 for (int i = 0; i < line.size(); ++i) {
-                    inputLine += getCode(line[i]);
+                    inputLine += encodeMap[line[i]];
                 }
                 outFile << inputLine << std::endl;
             }
@@ -105,40 +102,47 @@ public:
         outFile.close();
         myfile.close();
     }
-   HuffmanTree(std::string path, std::string outPath, bool status){
-       this->outPath = outPath;
-       this->path = path;
-       std::ifstream myfile(path);
-       std::string line;
-       if (myfile.is_open()){
-           int s = 0;
-           getline (myfile, line);
-           s = std::atoi(line.c_str());
-           for (int i = 0 ; i < s; ++i) {
-               getline (myfile, line);
-               occ[line[0]] = std::atoi(line.substr(2).c_str());
+    TreeNode* buildTree(){
+        if (priorityQueue.empty()) {
+            throw "空哈夫曼树";
+        }
+        while (priorityQueue.size() > 1) {
+            TreeNode *left = priorityQueue.top();
+            priorityQueue.pop();
+            TreeNode *right = priorityQueue.top();
+            priorityQueue.pop();
+            TreeNode *parent = new TreeNode(std::make_pair('\0', left->getVal().second +    right->getVal().second));
+            parent->setLeftChild(left);
+            parent->setRightChild(right);
+            priorityQueue.push(parent);
+        }
+        return priorityQueue.top();
+    }
+    HuffmanTree(std::string path, std::string outPath, bool status){
+        this->outPath = outPath;
+        this->path = path;
+        std::ifstream myfile(path);
+        std::string line;
+        if (myfile.is_open()){
+            int s = 0;
+            getline (myfile, line);
+            s = std::atoi(line.c_str());
+            for (int i = 0 ; i < s; ++i) {
+                getline (myfile, line);
+                occ[line[0]] = std::atoi(line.substr(2).c_str());
             }
-           for (auto i  : occ) {
-               priorityQueue.push(new TreeNode(i));
-           }
-           while (priorityQueue.size() > 1) {
-               TreeNode *left = priorityQueue.top();
-               priorityQueue.pop();
-               TreeNode *right = priorityQueue.top();
-               priorityQueue.pop();
-               TreeNode *parent = new TreeNode(std::make_pair('\0', left->getVal().second + right->getVal().second));
-               parent->setLeftChild(left);
-               parent->setRightChild(right);
-               priorityQueue.push(parent);
-           }
-           head = priorityQueue.top();
-           encode(head, "");
-           decode();
-           func();
-       }else{
-           throw "can not open this file";
-       }
-   }
+            for (auto i  : occ) {
+                priorityQueue.push(new TreeNode(i));
+            }
+        }else{
+            throw "can not open this file";
+        }
+        myfile.close();
+        head = buildTree();
+        encode(head, "");
+        decode();
+        decompress();
+    }
     HuffmanTree(std::string path, std::string outPath){
         this->outPath = outPath;
         this->path = path;
@@ -160,22 +164,9 @@ public:
             throw "can not open this file";
         }
         myfile.close();
-        if (priorityQueue.empty()) {
-            throw "空哈夫曼树";
-        }
-        while (priorityQueue.size() > 1) {
-            TreeNode *left = priorityQueue.top();
-            priorityQueue.pop();
-            TreeNode *right = priorityQueue.top();
-            priorityQueue.pop();
-            TreeNode *parent = new TreeNode(std::make_pair('\0', left->getVal().second + right->getVal().second));
-            parent->setLeftChild(left);
-            parent->setRightChild(right);
-            priorityQueue.push(parent);
-        }
-        head = priorityQueue.top();
+        head = buildTree();
         encode(head, "");
-        transform();
+        compress();
     }
 };
 #endif /* HuffmanTree_hpp */
