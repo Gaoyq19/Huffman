@@ -154,7 +154,7 @@ int myPriorityQueue<TreeNode*>::size()
     return queueSize;
 }
 void myPriorityQueue<TreeNode*>::push(TreeNode *val)
-{
+{//加在末尾,进行节点上浮.
     if (empty())
     {
         data[0] = val;
@@ -173,7 +173,7 @@ void myPriorityQueue<TreeNode*>::push(TreeNode *val)
 
 }
 void myPriorityQueue<TreeNode*>::pop()
-{
+{//删除第一个,把最后一个移到最前面,进行节点下沉.
     if (empty())
     {
         throw "Priority queue is empty\n";
@@ -184,6 +184,7 @@ void myPriorityQueue<TreeNode*>::pop()
     int leftChild = 2 * i + 1;
     int rightChild = 2 * i + 2;
     while ((leftChild < size() && data[i]->getVal().second > data[leftChild]->getVal().second ) || (rightChild < size() && data[i]->getVal().second > data[rightChild]->getVal().second)) {
+        //与更小的子节点交换
         if (data[leftChild]->getVal().second < data[rightChild]->getVal().second) {
             std::swap(data[i], data[leftChild]);
             i = leftChild;
